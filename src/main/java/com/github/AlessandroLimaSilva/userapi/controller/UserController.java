@@ -1,5 +1,7 @@
 package com.github.AlessandroLimaSilva.userapi.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.AlessandroLimaSilva.userapi.dto.MessageResponseDTO;
+import com.github.AlessandroLimaSilva.userapi.dto.request.UserDTO;
 import com.github.AlessandroLimaSilva.userapi.entity.User;
 import com.github.AlessandroLimaSilva.userapi.service.UserService;
 
@@ -25,8 +28,8 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public MessageResponseDTO createUser(@RequestBody User user) {
-		return userService.createUser(user);	
+	public MessageResponseDTO createUser(@RequestBody @Valid UserDTO userDTO) {
+		return userService.createUser(userDTO);	
 	}
 
 }
