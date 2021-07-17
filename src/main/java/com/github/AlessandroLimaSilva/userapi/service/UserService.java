@@ -56,4 +56,9 @@ public class UserService {
 
 		return userMapper.toDTO(user);
 	}
+
+	public void delete(Long id) throws UserNotFoundException{
+		userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+		userRepository.deleteById(id);
+	}
 }

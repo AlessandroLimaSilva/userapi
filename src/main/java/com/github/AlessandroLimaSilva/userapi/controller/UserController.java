@@ -38,4 +38,10 @@ public class UserController {
 	public UserDTO findById(@PathVariable Long id) throws UserNotFoundException {
 		return userService.findById(id);
 	}
+
+	@DeleteMapping("{/id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteById(@PathVariable Long id) throws UserNotFoundException {
+		userService.delete(id);
+	}
 }
