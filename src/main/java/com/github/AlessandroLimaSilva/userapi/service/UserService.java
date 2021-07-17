@@ -22,11 +22,8 @@ import lombok.AllArgsConstructor;
 public class UserService {
 
 	private UserRepository userRepository;
-	
 	private final UserMapper userMapper = UserMapper.INSTANCE;
-	
-	
-	
+
 	public MessageResponseDTO create(UserDTO userDTO) {
 		
 		User user = userMapper.toModel(userDTO);
