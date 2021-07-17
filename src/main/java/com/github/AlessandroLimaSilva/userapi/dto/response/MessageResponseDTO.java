@@ -1,4 +1,4 @@
-package com.github.AlessandroLimaSilva.userapi.dto;
+package com.github.AlessandroLimaSilva.userapi.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
