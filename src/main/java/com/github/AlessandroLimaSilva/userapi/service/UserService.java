@@ -1,8 +1,11 @@
 package com.github.AlessandroLimaSilva.userapi.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.github.AlessandroLimaSilva.userapi.exception.UserNotFoundException;
+import org.mapstruct.control.MappingControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +49,11 @@ public class UserService {
 		return allUser.stream().
 				map(userMapper::toDTO).
 				collect(Collectors.toList());
+	}
+
+	public UserDTO findById(Long id) throws UserNotFoundException {
+		User user = userRepository.findById(id).orElseThrow(( )-> new UserNotFoundException(id));
+
+		return userMapper.toDTO(user);
 	}
 }
