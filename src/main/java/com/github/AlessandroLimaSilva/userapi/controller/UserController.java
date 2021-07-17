@@ -34,14 +34,19 @@ public class UserController {
 		return userService.listAll();
 	}
 
-	@GetMapping("{/id}")
+	@GetMapping("/{id}")
 	public UserDTO findById(@PathVariable Long id) throws UserNotFoundException {
 		return userService.findById(id);
 	}
 
-	@DeleteMapping("{/id}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteById(@PathVariable Long id) throws UserNotFoundException {
 		userService.delete(id);
+	}
+
+	@PutMapping("/{id}")
+	public MessageResponseDTO updateById(Long id,@RequestBody @Valid UserDTO userDTO) throws UserNotFoundException {
+		return userService.updateById(id, userDTO);
 	}
 }

@@ -58,7 +58,23 @@ public class UserService {
 	}
 
 	public void delete(Long id) throws UserNotFoundException{
-		userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+		verifyIfExists(id);
 		userRepository.deleteById(id);
+	}
+
+	public MessageResponseDTO updateById(Long id, UserDTO userDTO) throws UserNotFoundException {
+		verifyIfExists(id);
+
+		User userToUpdate = userMapper.toModel(userDTO);
+		User savedUser = userRepository.save(userToUpdate);
+
+		MessageResponseDTO messageResponse =
+				createMessageResponse("User successfully Update with ID",savedUser.getId());
+
+		return messageResponse;
+	}
+
+	public User verifyIfExists(Long id) throws UserNotFoundException{
+		return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
 	}
 }
