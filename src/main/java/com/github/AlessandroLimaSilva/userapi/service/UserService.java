@@ -20,19 +20,24 @@ public class UserService {
 
 	private UserRepository userRepository;
 	
-	private final UserMapper userMapper;
+	private final UserMapper userMapper = UserMapper.INSTANCE;
 	
 	
 	
-	public MessageResponseDTO createUser(UserDTO userDTO) {
+	public MessageResponseDTO create(UserDTO userDTO) {
 		
 		User user = userMapper.toModel(userDTO);
 		User savedUser = userRepository.save(user);
 		
-		return MessageResponseDTO.
-				builder().
-				message("Create user with ID "+savedUser.getId()).
-				build();			
+		MessageResponseDTO messageResponse = 
+				createMessageResponse("User successfully created with ID",savedUser.getId());
+		
+		return messageResponse;		
+	}
+
+
+	private MessageResponseDTO createMessageResponse(String s, Long id2) {
+		return MessageResponseDTO.builder().message(s+id2).build();
 	}
 
 
